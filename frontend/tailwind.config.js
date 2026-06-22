@@ -12,10 +12,9 @@ export default {
           900: '#0b1528',
           800: '#132238',
         },
-        amberSignal: '#f59e0b',
       },
       backgroundImage: {
-        'dashboard-radial': 'radial-gradient(circle at top left, rgba(45,212,191,0.18), transparent 32%), radial-gradient(circle at top right, rgba(251,191,36,0.14), transparent 28%), linear-gradient(180deg, #07111f 0%, #0b1528 55%, #09101d 100%)',
+        'dashboard-radial': 'radial-gradient(circle at top left, rgba(59,130,246,0.22), transparent 32%), radial-gradient(circle at top right, rgba(37,99,235,0.16), transparent 28%), linear-gradient(180deg, #06101d 0%, #0b1528 55%, #09101d 100%)',
       },
     },
   },

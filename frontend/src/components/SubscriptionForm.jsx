@@ -39,7 +39,7 @@ export default function SubscriptionForm({ onSubmit, disabled }) {
             value={form.serviceName}
             onChange={(event) => setForm((current) => ({ ...current, serviceName: event.target.value }))}
             placeholder="Netflix, Figma, Notion..."
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400/60 focus:bg-white/10"
+            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-400/60 focus:bg-white/10"
           />
         </label>
 
@@ -52,20 +52,31 @@ export default function SubscriptionForm({ onSubmit, disabled }) {
             value={form.cost}
             onChange={(event) => setForm((current) => ({ ...current, cost: event.target.value }))}
             placeholder="0.00"
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400/60 focus:bg-white/10"
+            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-400/60 focus:bg-white/10"
           />
         </label>
 
         <label className="block">
           <span className="mb-2 block text-sm font-medium text-slate-300">Billing cycle</span>
-          <select
-            value={form.billingCycle}
-            onChange={(event) => setForm((current) => ({ ...current, billingCycle: event.target.value }))}
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-400/60 focus:bg-white/10"
-          >
-            <option value="Monthly">Monthly</option>
-            <option value="Yearly">Yearly</option>
-          </select>
+          <div className="grid grid-cols-2 gap-3 rounded-2xl border border-white/10 bg-white/5 p-2">
+            {['Monthly', 'Yearly'].map((cycle) => (
+              <button
+                key={cycle}
+                type="button"
+                onClick={() => setForm((current) => ({ ...current, billingCycle: cycle }))}
+                className={
+                  `rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                    form.billingCycle === cycle
+                      ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  }`
+                }
+                aria-pressed={form.billingCycle === cycle}
+              >
+                {cycle}
+              </button>
+            ))}
+          </div>
         </label>
 
         <label className="block">
@@ -74,7 +85,7 @@ export default function SubscriptionForm({ onSubmit, disabled }) {
             type="date"
             value={form.renewalDate}
             onChange={(event) => setForm((current) => ({ ...current, renewalDate: event.target.value }))}
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-400/60 focus:bg-white/10"
+            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-blue-400/60 focus:bg-white/10"
           />
         </label>
       </div>
@@ -82,7 +93,7 @@ export default function SubscriptionForm({ onSubmit, disabled }) {
       <button
         type="submit"
         disabled={disabled}
-        className="mt-6 w-full rounded-2xl bg-gradient-to-r from-cyan-400 via-teal-400 to-amber-300 px-4 py-3 font-semibold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-6 w-full rounded-2xl bg-gradient-to-r from-blue-500 via-sky-500 to-blue-600 px-4 py-3 font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
       >
         Add subscription
       </button>

@@ -1,7 +1,7 @@
-export default function MetricCard({ title, value, description, tone = 'cyan' }) {
+export default function MetricCard({ title, value, description, tone = 'blue' }) {
   const tones = {
-    cyan: 'border-cyan-400/20 bg-cyan-500/10 text-cyan-50/80',
-    amber: 'border-amber-400/25 bg-amber-500/10 text-amber-50/80',
+    blue: 'border-blue-400/20 bg-blue-500/10 text-blue-50/80',
+    deepBlue: 'border-sky-400/20 bg-sky-500/10 text-sky-50/80',
   };
 
   return (

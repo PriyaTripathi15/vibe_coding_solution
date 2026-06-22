@@ -8,13 +8,13 @@ export default function MetricsRow({ totalMonthlyBurn, upcomingRenewals }) {
         title="Total Monthly Burn Rate"
         value={totalMonthlyBurn}
         description="Annual plans are normalized to a monthly value before aggregation."
-        tone="cyan"
+        tone="blue"
       />
       <MetricCard
         title="Upcoming Renewals Alert Count"
         value={upcomingRenewals}
         description="Renewals due within the next 7 days are flagged as urgent."
-        tone="amber"
+        tone="deepBlue"
       />
       <EngineCard />
     </section>

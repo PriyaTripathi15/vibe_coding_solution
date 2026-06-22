@@ -126,11 +126,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-dashboard-radial text-slate-100">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1680px] flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8">
         <BrandHeader totalItems={subscriptions.length} pausedItems={metrics.pausedItems} />
 
         {error ? (
-          <div className="rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-100">
+          <div className="rounded-2xl border border-blue-400/30 bg-blue-400/10 px-4 py-3 text-sm text-blue-100">
             {error}
           </div>
         ) : null}
@@ -144,7 +144,7 @@ export default function App() {
           upcomingRenewals={metrics.upcomingRenewals}
         />
 
-        <section className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
+        <section className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)]">
           <SubscriptionForm onSubmit={handleCreateSubscription} disabled={isLoading} />
           {isLoading ? (
             <div className="grid place-items-center rounded-[1.75rem] border border-white/10 bg-white/5 p-10 text-slate-300 shadow-glow backdrop-blur-xl">
