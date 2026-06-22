@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import CalendarDatePicker from './CalendarDatePicker';
+import SegmentedControl from './SegmentedControl';
 
 const emptyForm = {
   serviceName: '',
@@ -58,34 +60,21 @@ export default function SubscriptionForm({ onSubmit, disabled }) {
 
         <label className="block">
           <span className="mb-2 block text-sm font-medium text-slate-300">Billing cycle</span>
-          <div className="grid grid-cols-2 gap-3 rounded-2xl border border-white/10 bg-white/5 p-2">
-            {['Monthly', 'Yearly'].map((cycle) => (
-              <button
-                key={cycle}
-                type="button"
-                onClick={() => setForm((current) => ({ ...current, billingCycle: cycle }))}
-                className={
-                  `rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                    form.billingCycle === cycle
-                      ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
-                  }`
-                }
-                aria-pressed={form.billingCycle === cycle}
-              >
-                {cycle}
-              </button>
-            ))}
-          </div>
+          <SegmentedControl
+            value={form.billingCycle}
+            onChange={(billingCycle) => setForm((current) => ({ ...current, billingCycle }))}
+            options={[
+              { value: 'Monthly', label: 'Monthly' },
+              { value: 'Yearly', label: 'Yearly' },
+            ]}
+          />
         </label>
 
         <label className="block">
           <span className="mb-2 block text-sm font-medium text-slate-300">Next renewal date</span>
-          <input
-            type="date"
+          <CalendarDatePicker
             value={form.renewalDate}
-            onChange={(event) => setForm((current) => ({ ...current, renewalDate: event.target.value }))}
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-blue-400/60 focus:bg-white/10"
+            onChange={(renewalDate) => setForm((current) => ({ ...current, renewalDate }))}
           />
         </label>
       </div>

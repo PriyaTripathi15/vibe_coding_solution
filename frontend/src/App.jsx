@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import BrandHeader from './components/BrandHeader';
+import SubscriptionFilters from './components/SubscriptionFilters';
 import MetricsRow from './components/MetricsRow';
 import SubscriptionForm from './components/SubscriptionForm';
 import SubscriptionTable from './components/SubscriptionTable';
@@ -35,6 +36,9 @@ export default function App() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All');
+  const [cycleFilter, setCycleFilter] = useState('All');
 
   useEffect(() => {
     let mounted = true;
@@ -80,6 +84,19 @@ export default function App() {
       pausedItems,
     };
   }, [subscriptions]);
+
+  const visibleSubscriptions = useMemo(() => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    return subscriptions.filter((subscription) => {
+      const matchesSearch =
+        !normalizedSearch || subscription.serviceName.toLowerCase().includes(normalizedSearch);
+      const matchesStatus = statusFilter === 'All' || subscription.status === statusFilter;
+      const matchesCycle = cycleFilter === 'All' || subscription.billingCycle === cycleFilter;
+
+      return matchesSearch && matchesStatus && matchesCycle;
+    });
+  }, [subscriptions, searchTerm, statusFilter, cycleFilter]);
 
   async function handleCreateSubscription(form) {
     try {
@@ -151,7 +168,19 @@ export default function App() {
               Loading subscriptions...
             </div>
           ) : (
-            <SubscriptionTable subscriptions={subscriptions} onToggleStatus={handleToggleStatus} />
+            <div className="flex flex-col gap-4">
+              <SubscriptionFilters
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                statusFilter={statusFilter}
+                onStatusChange={setStatusFilter}
+                cycleFilter={cycleFilter}
+                onCycleChange={setCycleFilter}
+                visibleCount={visibleSubscriptions.length}
+                totalCount={subscriptions.length}
+              />
+              <SubscriptionTable subscriptions={visibleSubscriptions} onToggleStatus={handleToggleStatus} />
+            </div>
           )}
         </section>
       </div>
