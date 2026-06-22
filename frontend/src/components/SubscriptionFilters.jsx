@@ -4,6 +4,16 @@ import SegmentedControl from './SegmentedControl';
 export default function SubscriptionFilters({ searchTerm, onSearchChange, statusFilter, onStatusChange, cycleFilter, onCycleChange, visibleCount, totalCount }) {
   const [isOpen, setIsOpen] = useState(true);
 
+  function handleStatusChange(value) {
+    onStatusChange(value);
+    setIsOpen(false);
+  }
+
+  function handleCycleChange(value) {
+    onCycleChange(value);
+    setIsOpen(false);
+  }
+
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-3 backdrop-blur-xl">
       <div className="flex flex-col gap-3">
@@ -43,7 +53,7 @@ export default function SubscriptionFilters({ searchTerm, onSearchChange, status
               <span className="mb-1.5 block text-[11px] uppercase tracking-[0.28em] text-slate-500">Status</span>
               <SegmentedControl
                 value={statusFilter}
-                onChange={onStatusChange}
+                onChange={handleStatusChange}
                 size="sm"
                 options={[
                   { value: 'All', label: 'All' },
@@ -57,7 +67,7 @@ export default function SubscriptionFilters({ searchTerm, onSearchChange, status
               <span className="mb-1.5 block text-[11px] uppercase tracking-[0.28em] text-slate-500">Cycle</span>
               <SegmentedControl
                 value={cycleFilter}
-                onChange={onCycleChange}
+                onChange={handleCycleChange}
                 size="sm"
                 options={[
                   { value: 'All', label: 'All' },
@@ -73,6 +83,7 @@ export default function SubscriptionFilters({ searchTerm, onSearchChange, status
                 onSearchChange('');
                 onStatusChange('All');
                 onCycleChange('All');
+                setIsOpen(false);
               }}
               className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-white/10 hover:text-white"
             >
