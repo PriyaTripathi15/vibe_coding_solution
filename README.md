@@ -1,4 +1,4 @@
-# Solution Quantiphi - Personal Finance Dashboard
+# Solution - Personal Finance Dashboard
 
 A full-stack personal finance dashboard for tracking recurring SaaS and streaming subscriptions. The app helps users monitor monthly cash-flow burn, manage renewal dates, and simulate savings by pausing subscriptions instead of deleting them.
 
